@@ -12,8 +12,8 @@ from reportlab.pdfbase.ttfonts import TTFont
 
 ROOT=Path(__file__).resolve().parents[1]
 os.chdir(ROOT)
-NAME=os.environ.get('ALUNO_NOME','Nome completo: a preencher')
-REG=os.environ.get('ALUNO_MATRICULA','Matrícula: a preencher')
+NAME=os.environ.get('ALUNO_NOME','Gabriel Chagas Lage')
+REG=os.environ.get('ALUNO_MATRICULA','Matrícula: 803292')
 FONT='/System/Library/Fonts/Supplemental/'
 pdfmetrics.registerFont(TTFont('Arial',FONT+'Arial.ttf'))
 pdfmetrics.registerFont(TTFont('ArialBold',FONT+'Arial Bold.ttf'))

@@ -33,7 +33,7 @@ O limite de complexidade cognitiva foi configurado em 15, como no PDF (a base us
 O original tem complexidade cognitiva 27 e outro erro `sonarjs/no-collapsible-if`; o refatorado não apresenta erros.
 
 O relatório de quatro páginas está em `output/pdf/relatorio-bad-smells.pdf`.
-**Antes de entregar:** preencher nome completo e matrícula na capa pelo gerador `scripts/gerar-relatorio.py`.
+Capa preenchida com Gabriel Chagas Lage, matrícula 803292. O gerador está em `scripts/gerar-relatorio.py`.
 Saídas reais dos comandos e commit da base estão em `evidencias/`.
 A imagem do ESLint no relatório é uma reprodução visual da saída capturada, não uma captura de tela do terminal.
 
