@@ -1,0 +1,1 @@
+162 cenários equivalentes, normalizando somente <tr > para <tr>; mutações preservadas.

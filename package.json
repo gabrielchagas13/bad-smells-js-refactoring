@@ -1,12 +1,14 @@
 {
   "name": "bad-smells-js-refactoring",
   "version": "1.0.0",
-  "description": "Projeto de exemplo para o trabalho de refatoração e bad smells.",
+  "description": "Projeto de exemplo para o trabalho de refatora\u00e7\u00e3o e bad smells.",
   "main": "src/ReportGenerator.js",
   "type": "module",
   "scripts": {
-    "test": "jest",
-    "lint": "eslint src/"
+    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
+    "lint": "eslint src/",
+    "test:refactored": "npm test -- --runInBand tests/ReportGenerator.refactored.test.js",
+    "lint:refactored": "eslint src/ReportGenerator.refactored.js"
   },
   "keywords": [
     "refactoring",

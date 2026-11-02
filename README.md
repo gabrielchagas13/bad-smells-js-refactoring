@@ -1,37 +1,40 @@
 # Detecção de Bad Smells e Refatoração Segura
 
-Este é o repositório-base para o trabalho prático sobre Bad Smells e Refatoração.
+Entrega: https://github.com/gabrielchagas13/bad-smells-js-refactoring
 
-## 1. Contexto
+Base: https://github.com/CleitonSilvaT/bad-smells-js-refactoring
 
-O código em `src/ReportGenerator.js` funciona, mas foi escrito de forma mal cheirosa (com Bad Smells). Ele é difícil de ler, manter e testar.
+## Executar
 
-A suíte de testes em `__tests__/ReportGenerator.test.js` é sua **rede de segurança**. Ela está completa, robusta e testa o _comportamento_ (o resultado final), não a implementação.
+Requer Node.js 18 ou superior. Instale com `npm ci`.
 
-## 2. Seu Desafio
+- `npm test -- --runInBand`: executa as duas versões (9/10 testes passam; veja a falha preexistente abaixo).
+- `npm run test:refactored`: 5/5 testes da versão refatorada passam.
+- `npm run lint:refactored`: nenhum erro.
+- `npm run lint`: analisa ambas as versões; os dois erros do original permanecem visíveis.
+- `node scripts/verificar-equivalencia.js`: compara 162 cenários de papéis, formatos, limites e prioridades.
 
-1.  **Analisar:** Rodar o ESLint (`npx eslint src/`) e identificar os Bad Smells apontados pela ferramenta (e manualmente).
-2.  **Refatorar:** Criar uma cópia do arquivo (`src/ReportGenerator.refactored.js`) e refatorar o código para que ele fique limpo, legível e sem os smells detectados.
-3.  **Validar:** Criar uma cópia do teste (`__tests__/ReportGenerator.refactored.test.js`), apontá-la para seu novo arquivo refatorado e garantir que **todos os testes continuem passando**.
+## Falha preexistente e preservação dos originais
 
-**Regra Principal:** Você não deve alterar os testes (exceto para duplicá-los). A suíte de testes é a sua garantia de que a refatoração foi bem-sucedida.
+O projeto-base usa ES Modules, mas seu comando Jest não os habilitava. O script de execução foi ajustado, sem modificar testes.
+Após esse ajuste, o original passa em 4/5 testes: a linha HTML sem prioridade produz `<tr >`, enquanto o teste espera `<tr>`.
+`src/ReportGenerator.js` e `tests/ReportGenerator.test.js` permanecem intactos.
+A cópia `tests/ReportGenerator.refactored.test.js` difere somente no import.
+A versão refatorada corrige o espaço na abertura de `<tr>` e passa nos cinco testes.
+Essa correção é uma mudança textual deliberada, além da refatoração, e está documentada no relatório.
+Não se afirma que a suíte completa passa: para isso seria necessário corrigir o original, contrariando a exigência de preservá-lo.
 
-## 3. Como Começar
+## Refatoração e análise
 
-1.  **Instale as dependências:**
-    ```bash
-    npm install
-    ```
-2.  **Execute os testes (Rede de Segurança):**
+Método longo e condicionais aninhadas foram separados em funções de autorização, prioridade e formatadores CSV/HTML.
+As linhas e o cálculo do total passaram a ser compartilhados entre os papéis. Os limites 500 e 1000 receberam nomes.
+A mutação de `item.priority`, o construtor e o tratamento de formatos e papéis desconhecidos foram preservados.
+O limite de complexidade cognitiva foi configurado em 15, como no PDF (a base usava 5).
+O original tem complexidade cognitiva 27 e outro erro `sonarjs/no-collapsible-if`; o refatorado não apresenta erros.
 
-    ```bash
-    npm test
-    ```
+O relatório de quatro páginas está em `output/pdf/relatorio-bad-smells.pdf`.
+**Antes de entregar:** preencher nome completo e matrícula na capa pelo gerador `scripts/gerar-relatorio.py`.
+Saídas reais dos comandos e commit da base estão em `evidencias/`.
+A imagem do ESLint no relatório é uma reprodução visual da saída capturada, não uma captura de tela do terminal.
 
-    (Confirme que todos passam antes de começar).
-
-3.  **Execute a Análise Estática (Detecção de Smells):**
-    ```bash
-    npx eslint src/
-    ```
-    (Analise os erros reportados pelo `eslint-plugin-sonarjs`).
+A suíte fornecida tem apenas cinco testes e não comprova correção para toda entrada possível. A comparação adicional cobre 162 combinações e preservação das mutações, sem substituir os testes originais.

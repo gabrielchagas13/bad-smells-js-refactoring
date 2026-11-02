@@ -1,0 +1,4 @@
+
+> bad-smells-js-refactoring@1.0.0 lint:refactored
+> eslint src/ReportGenerator.refactored.js
+
